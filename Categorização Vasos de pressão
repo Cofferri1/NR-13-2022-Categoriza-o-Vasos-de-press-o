@@ -1,0 +1,117 @@
+def PMO():
+    escolha = input('''PMO do equipamento está em?
+        1) kgf/cm²
+        2) Bar
+        3) Mpa
+        ''')
+    if escolha == '1':
+        pressao = float(input("Digite a pressão: "))
+        pressao = pressao * 0.098067
+    elif escolha == '2':
+        pressao = float(input("Digite a pressão: "))
+        pressao = pressao * 0.1
+    elif escolha == '3':
+        pressao = float(input("Digite a pressão: "))
+    else:
+        print("Opção inválida")
+        return None
+    print("Pressão é {:.3f} Mpa".format(pressao))
+    return pressao
+
+def volume():
+    escolha = input('''Qual o tipo de volume?
+        1) Litros
+        2) m³
+        ''')
+    if escolha == '1':
+        volume = float(input("Digite o volume: "))
+        volume = volume / 1000
+    elif escolha == '2':
+        volume = float(input("Digite o volume: "))
+    else:
+        print("Opção inválida")
+        return None
+    print("Volume é {:.3f} m³".format(volume))
+    return volume
+
+def P_V(pressao, volume):
+    pv = pressao * volume
+    print("PV é {:.3f}".format(pv))
+    return pv
+
+def GrupoRisco(pv):
+    if pv <= 1:
+        return "Categoria 5"
+    elif pv < 2.5 and pv > 1:
+        return "Categoria 4"
+    elif pv < 30 and pv > 2.5:
+        return "Categoria 3"
+    elif pv < 100 and pv > 30:
+        return "Categoria 2"
+    elif pv > 100:
+        return "Categoria 1"
+    return None
+
+def Fluido():
+    fluido = input("Digite a Classe do Fluido: ").upper()
+    return fluido
+
+def categorização(fluid, grupo):
+    if fluid == "A":
+        if grupo == "Categoria 1":
+            return "I"
+        elif grupo == "Categoria 2":
+            return "II"
+        elif grupo == "Categoria 3":
+            return "III"
+        elif grupo == "Categoria 4":
+            return "III"
+        elif grupo == "Categoria 5":
+            return "III"
+    elif fluid == "B":
+        if grupo == "Categoria 1":
+            return "I"
+        elif grupo == "Categoria 2":
+            return "II"
+        elif grupo == "Categoria 3":
+            return "III"
+        elif grupo == "Categoria 4":
+            return "IV"
+        elif grupo == "Categoria 5":
+            return "IV"
+    elif fluid == "C":
+        if grupo == "Categoria 1":
+            return "I"
+        elif grupo == "Categoria 2":
+            return "II"
+        elif grupo == "Categoria 3":
+            return "III"
+        elif grupo == "Categoria 4":
+            return "IV"
+        elif grupo == "Categoria 5":
+            return "V"
+    elif fluid == "D":
+        if grupo == "Categoria 1":
+            return "I"
+        elif grupo == "Categoria 2":
+            return "II"
+        elif grupo == "Categoria 3":
+            return "III"
+        elif grupo == "Categoria 4":
+            return "V"
+        elif grupo == "Categoria 5":
+            return "V"
+    return None
+
+# Execução do programa
+pressão = PMO()
+if pressão is not None:
+    volume = volume()
+    if volume is not None:
+        pv = P_V(pressão, volume)
+        grupo = GrupoRisco(pv)
+        fluid = Fluido()
+        categoria = categorização(fluid, grupo)
+        print(f'Grupo de risco: {grupo}')
+        print(f'Classe de fluido: {fluid}')
+        print(f'Categoria de classificação: {categoria}')
